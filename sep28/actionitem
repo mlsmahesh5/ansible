@@ -1,0 +1,27 @@
+# udate the packages
+sudo apt-get update
+
+# install ansible
+sudo apt-get install ansible
+
+# generate ssh keys 
+ssh-keygen
+
+# copy public_key to instance using user_name & ip
+ssh-copy-id <your_username>@<worker_ip>
+
+# test wheather able to login to that instance
+ssh <your_username>@<worker_ip>
+
+# create a file with extention.ini
+vi inventory.ini
+
+# In .ini file mention the details as required
+[workers]
+<worker_ip> ansible_ssh_user=<your_username>
+
+# to test the connection using below command 
+ansible workers -i inventory.ini -u <your_username> -m ping
+
+# to copy file to destination
+ansible workers -i inventory.ini -u <your_username> -m copy -a "src=/path/to/local/file.txt dest=/path/to/remote/directory/"

@@ -1,0 +1,7 @@
+# to test the connection using below command
+ansible workers -i inventory.ini -u <your_username> -m ping
+
+# to copy file to destination
+ansible workers -i inventory.ini -u <your_username> -m copy -a "src=/path/to/local/file.txt dest=/path/to/remote/directory/"
+
+
