@@ -1,0 +1,27 @@
+---
+- name: Configure Apache to Display Mahesh
+  hosts: host-ip 
+  become: yes 
+
+  tasks:
+    - name: Copy index.html to target server
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+      become: yes
+      notify:
+        - Restart Apache
+
+    - name: Install Apache (httpd) service
+      apt:
+        name: apache2
+        state: present
+      become: yes  
+
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+      become: yes 
+      
