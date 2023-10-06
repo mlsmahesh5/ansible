@@ -1,0 +1,6 @@
+---
+- name: Configure Web Server
+  hosts: <host_ip>  
+  become: yes
+  roles:
+    - webserver

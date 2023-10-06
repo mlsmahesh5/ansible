@@ -1,0 +1,14 @@
+---
+# tasks file for webserver
+
+    - name: Install Apache (httpd) service
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+
+    - name: Copy index.html to target server
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
+      notify:
+        - Restart Apache
