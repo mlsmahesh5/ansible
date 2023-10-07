@@ -1,0 +1,29 @@
+---
+# tasks file for docker
+
+    - name: Install docker
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+      # notify:
+      #   - Restart docker 
+    
+    - name: Pull Nginx image from Docker Hub
+      docker_image:
+        name: nginx
+        source: pull
+
+    - name: Pull Apache HTTP Server (httpd) image from Docker Hub
+      docker_image:
+        name: httpd
+        source: pull
+
+    - name: Run "docker images" command
+      shell: docker images
+      register: docker_images_output
+      changed_when: false  # Prevent Ansible from considering the command as always changed
+
+    - name: Display Docker images
+      debug:
+        var: docker_images_output.stdout_lines
+        
