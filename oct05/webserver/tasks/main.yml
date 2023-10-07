@@ -10,5 +10,12 @@
       ansible.builtin.copy:
         src: index.html
         dest: /var/www/html/index.html
+
+    - name: Ensure httpd is listening on the specified port
+      ansible.builtin.lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: "^Listen "
+        line: "Listen {{ http_port }}"
       notify:
-        - Restart Apache
+        - Restart Apache        
+

@@ -1,6 +1,6 @@
 ---
 - name: Configure Apache to Display Mahesh
-  hosts: host-ip 
+  hosts: <host-ip> 
   become: yes 
 
   tasks:
